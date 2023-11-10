@@ -11,10 +11,12 @@ using namespace std;
 
 void Gameloop() {
   ClearBackground(BACKGROUND);
-  Grid *graph = new Grid; 
+  Grid *grid = new Grid; 
   Line *line = new Line;
-  graph->DrawGrid();
-  line->Draw(0, 0, 4, -2);
+  InputBox *box = new InputBox(2, 7);
+  box->Draw();
+  line->Draw(0, 0, 2, -6);
+  grid->DrawGrid();
 }
 
 int main () {

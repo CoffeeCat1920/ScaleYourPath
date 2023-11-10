@@ -1,7 +1,7 @@
 # Tital: Scale your path
 
 # Abstraction: 
-A platformer where your goal is to reach a goal to complete the but, *BUT* there is twist. There are no actual platforms to jump or climb. The player must create their own platformer by input a function which your be ploted on a cartisian plane making a platform for player to walk on.
+A ball roll game where your goal is to reach a goal to complete the but, *BUT* there is twist. There are no actual platforms to jump or climb. The player must create their own platformer by input a set of vectors which are to be ploted on a cartisian plane making a platform for ball to roll on.
 
 # Functional Requirement 
 - Functionality to display graphics.
