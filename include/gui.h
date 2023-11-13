@@ -1,17 +1,16 @@
-#include <iostream>
-#include <string>
-
 #include "raylib.h"
 #include "settings.h"
 
 class TextBox {
   public:
   int x, y;
+  char key;
   TextBox(){
     x=0;
     y=0;
   } 
   TextBox(int x, int y) {
+    key = '_';
     this->x = x;
     this->y = y;
   }
@@ -19,11 +18,21 @@ class TextBox {
     if (CheckCollisionPointRec(GetMousePosition(), rec)) return true;
     else return false;
   }
-  int key=GetCharPressed();
-  char keystr[2] = {(char)key, '\0'};
   void Draw() {
     Rectangle rec = {BLOCK * (float)x, BLOCK * (float)y, BLOCK, BLOCK}; 
     DrawRectangleRec(rec, RAYWHITE);
+    if (OnMouse(rec)) {
+      if (GetCharPressed()!=0) {
+        key = GetCharPressed();
+      }
+      else {
+        key = '_';
+      }
+      text(key);
+    }
+  }
+  void text(char key) {
+    char keystr[2] = {(char)key, '\0'};
     DrawText(keystr, BLOCK * (float)x, BLOCK * (float)y, BLOCK, BLACK);
   }
 };

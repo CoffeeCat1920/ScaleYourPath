@@ -15,7 +15,7 @@ void Gameloop() {
   Line *line = new Line;
   InputBox *box = new InputBox(2, 7);
   box->Draw();
-  line->Draw(0, 0, 2, -6);
+  line->Draw(0, 0, 7, -6);
   grid->DrawGrid();
 }
 
