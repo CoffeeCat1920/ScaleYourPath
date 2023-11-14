@@ -9,27 +9,25 @@
 
 using namespace std;
 
-void Gameloop() {
-  ClearBackground(BACKGROUND);
+int main () {
+  InitWindow(BLOCK * BOARD + BORDER * BLOCK * 2 + BLOCK, BLOCK * BOARD + BORDER * BLOCK, "Scale your Path");
+
   Grid *grid = new Grid; 
   Line *line = new Line;
-  InputBox *box = new InputBox(2, 7);
-  box->Draw();
-  line->Draw(0, 0, 7, -6);
-  grid->DrawGrid();
-}
+  InputBox *box1 = new InputBox(); 
+  InputBox *box2 = new InputBox();
 
-int main () {
-  InitWindow(BLOCK * BOARD + BORDER * BLOCK, BLOCK * BOARD + BORDER * BLOCK, "Scale your Path");
   SetTargetFPS(60);
   
   while (!WindowShouldClose()) {
     BeginDrawing();
-      Gameloop();
+    ClearBackground(BACKGROUND);
+    box1->Draw(8, 2);
+    box2->Draw(8, 4);
+    line->Draw(0, 0, box1->Output().x, -box1->Output().y);
+    grid->DrawGrid();
     EndDrawing();
   }
-  
   CloseWindow();
-
   return 0;
 }

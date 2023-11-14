@@ -1,53 +1,67 @@
 #include "raylib.h"
 #include "settings.h"
 
-class TextBox {
-  public:
-  int x, y;
-  char key;
-  TextBox(){
-    x=0;
-    y=0;
-  } 
-  TextBox(int x, int y) {
-    key = '_';
-    this->x = x;
-    this->y = y;
+struct Vec {
+  int x;
+  int y;
+};
+
+class Box {
+private:
+  Rectangle textBox;
+  bool onMouse = false;
+  int letterCount = 0;
+  char digit[2];
+public:
+  Box() {
+    textBox.width = BLOCK;
+    textBox.height = BLOCK;
+    digit[1] = '\0';
   }
-  bool OnMouse(Rectangle rec) {
-    if (CheckCollisionPointRec(GetMousePosition(), rec)) return true;
-    else return false;
-  }
-  void Draw() {
-    Rectangle rec = {BLOCK * (float)x, BLOCK * (float)y, BLOCK, BLOCK}; 
-    DrawRectangleRec(rec, RAYWHITE);
-    if (OnMouse(rec)) {
-      if (GetCharPressed()!=0) {
+  void Draw(int x, int y) {
+    textBox.x = x * BLOCK;
+    textBox.y = y * BLOCK;
+    if (CheckCollisionPointRec(GetMousePosition(), textBox)) onMouse = true;
+    else onMouse = false;
+    if (onMouse) {
+      char key = GetCharPressed();
+      while (key > 0) {
+        if ((key>=32) && (key<=125) && letterCount<1) {
+          digit[0] = key;
+          letterCount++;
+        }  
         key = GetCharPressed();
       }
-      else {
-        key = '_';
+      if (IsKeyPressed(KEY_BACKSPACE)) {
+        digit[0] = 0;
+        letterCount = 0;
       }
-      text(key);
     }
+    DrawRectangleRec(textBox, LINES);
+    DrawText(digit, textBox.x + 20, textBox.y, BLOCK, BLACK);
   }
-  void text(char key) {
-    char keystr[2] = {(char)key, '\0'};
-    DrawText(keystr, BLOCK * (float)x, BLOCK * (float)y, BLOCK, BLACK);
+  char Output() {
+    return digit[0];
   }
 };
 
 class InputBox {
-  public:
-  int x, y;
-  InputBox(int x, int y) {
-    this->x = x;
-    this->y = y;
+private:
+  Box *box1 = new Box();
+  Box *box2 = new Box();
+public:
+  ~ InputBox() {
+    delete  box1;
+    delete  box2;
   }
-  void Draw() {
-    for (int i = 1; i<=2; i++) {
-      TextBox *box = new TextBox(x+i, y); 
-      box->Draw();
-    }
+  void Draw(int x, int y) {
+    box1->Draw(x, y);
+    box2->Draw(x+1, y);
   }
+  Vec Output() {
+    Vec vec;
+    vec.x = (int)box1->Output();
+    vec.y = (int)box2->Output();
+    return vec;
+  } 
 };

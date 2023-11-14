@@ -1,7 +1,5 @@
 #include "raylib.h"
-#include "raymath.h"
 #include "settings.h"
-#include <iostream>
 
 class Grid {
   public:
