@@ -21,6 +21,4 @@ A ball roll game where your goal is to reach a goal to complete the but, *BUT* t
 - *Git* for syncronizing the project.
 - *Neovim* as programming enviroment with *gcc* compiler.
 - *Raylib* library for display graphics, handeling input and updating graphics.
-- *Raysound* for sound.
-- *Cmath* and *RayShape* for ploting graphic.
 - *Gnu Image Manipulation Programming* making graphics. 

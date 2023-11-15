@@ -1,33 +1,39 @@
-#include <iostream>
-
 #include "../include/raylib.h"
-#include "../include/raymath.h"
 
 #include "../include/settings.h"
 #include "../include/graph.h"
 #include "../include/gui.h"
 
-using namespace std;
+class Game {
+private:
+  Grid *grid = new Grid; 
+  Line *line = new Line;
+  InputBox *inputbox1 = new InputBox(); 
+  InputBox *inputbox2 = new InputBox();
+public:
+  void Update() {
+    inputbox1->Update(8, 2);
+    inputbox2->Update(8, 4);
+    float x1 = inputbox1->Output().x - '0';
+    float y1 = inputbox1->Output().y - '0';
+    float x2 = inputbox2->Output().x - '0'; 
+    float y2 = inputbox2->Output().y - '0';
+    line->Draw(x1, -y1, x2, -y2);
+    grid->DrawGrid();
+  }
+};
 
 int main () {
   InitWindow(BLOCK * BOARD + BORDER * BLOCK * 2 + BLOCK, BLOCK * BOARD + BORDER * BLOCK, "Scale your Path");
-
-  Grid *grid = new Grid; 
-  Line *line = new Line;
-  InputBox *box1 = new InputBox(); 
-  InputBox *box2 = new InputBox();
-
+  Game *game = new Game();
   SetTargetFPS(60);
-  
   while (!WindowShouldClose()) {
     BeginDrawing();
     ClearBackground(BACKGROUND);
-    box1->Draw(8, 2);
-    box2->Draw(8, 4);
-    line->Draw(0, 0, box1->Output().x, -box1->Output().y);
-    grid->DrawGrid();
+    game->Update();
     EndDrawing();
   }
+  delete game;
   CloseWindow();
   return 0;
 }

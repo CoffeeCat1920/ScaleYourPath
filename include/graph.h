@@ -1,10 +1,13 @@
+#ifndef GRAPH_H
+#define GRAPH_H
+
 #include "raylib.h"
 #include "settings.h"
 
 class Grid {
   public:
   void DrawGrid() { 
-    for (float i = 0; i<=6; i++) {
+    for (float i = 0; i<=BOARD; i++) {
       DrawLineEx(Vector2{0 + BLOCK, BLOCK * i + BLOCK}, Vector2{BLOCK * BOARD + BLOCK, BLOCK * i + BLOCK}, 1, LINES); 
       DrawLineEx(Vector2{BLOCK * i + BLOCK, 0 + BLOCK}, Vector2{BLOCK * i + BLOCK, BLOCK * BOARD + BLOCK}, 1, LINES); 
     }
@@ -21,3 +24,4 @@ class Line {
     Graph(Vector2{BLOCK * start1 + BLOCK, BLOCK * start2 + BLOCK}, Vector2{BLOCK * end1 + BLOCK,BLOCK * end2 + BLOCK});
   }
 };
+#endif

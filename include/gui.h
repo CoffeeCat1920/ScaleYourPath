@@ -1,3 +1,6 @@
+#ifndef GUI_H
+#define GUI_H
+
 #include "raylib.h"
 #include "settings.h"
 
@@ -54,7 +57,7 @@ public:
     delete  box1;
     delete  box2;
   }
-  void Draw(int x, int y) {
+  void Update(int x, int y) {
     box1->Draw(x, y);
     box2->Draw(x+1, y);
   }
@@ -65,3 +68,5 @@ public:
     return vec;
   } 
 };
+
+#endif // !GUI_H
