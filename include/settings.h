@@ -1,7 +1,10 @@
 #define BLOCK 100 
 #define BOARD 6
 #define BORDER 2
-#define FONT_SIZE 100
+#define FONT_SIZE 100 
+#define LINE_FONT_SIZE 32
+
+#define FONT (SpriteFont) ../assests/deepkyd-normal.otf
 
 #define LIGHT_BLUE (Color) {173, 216, 255, 255}
 #define LAVENDER_MIST (Color) {232, 230, 249, 255}
@@ -22,3 +25,4 @@
 #define BACKGROUND (Color) LAVENDER_MIST 
 #define LINES (Color) RICH_BLACK
 #define PLATFORM (Color) MAUVE
+#define ERROR (Color) DUSTY_ROSE

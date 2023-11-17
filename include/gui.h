@@ -14,7 +14,7 @@ private:
   Rectangle boundry;
   Rectangle box;
   bool onMouse = true;
-  bool emptyBox = false;
+  bool emptyBox = true;
   int letterCount = 0;
   char digit[2];
   Color boxCol;
@@ -57,7 +57,7 @@ public:
     DrawRectangleRec(boundry, boxCol);
     DrawRectangleRec(box, BACKGROUND);
     DrawText(digit, boundry.x + 20, boundry.y, FONT_SIZE, boxCol);
-    if (emptyBox) DrawText("_", boundry.x + 20, boundry.y, FONT_SIZE, boxCol);
+    if (emptyBox && onMouse) DrawText("_", boundry.x + 20, boundry.y, FONT_SIZE, boxCol);
   }
   char Output() {
     return digit[0];
