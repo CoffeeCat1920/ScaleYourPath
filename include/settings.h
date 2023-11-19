@@ -26,3 +26,4 @@
 #define LINES (Color) RICH_BLACK
 #define PLATFORM (Color) MAUVE
 #define ERROR (Color) DUSTY_ROSE
+#define BALL (Color) RAISIN_BLACK 

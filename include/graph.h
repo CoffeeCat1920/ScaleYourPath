@@ -1,6 +1,7 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
+#include "gui.h"
 #include "raylib.h"
 #include "settings.h"
 
@@ -28,7 +29,7 @@ public:
   }
 };
 class Line {
-  public:
+public:
   void Graph(Vector2 start, Vector2 end) {
     DrawLineEx(start, end, 5, PLATFORM);    
   }
