@@ -1,6 +1,8 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
+#include <iostream>
+
 #include "gui.h"
 #include "raylib.h"
 #include "settings.h"
@@ -33,10 +35,10 @@ public:
   void Graph(Vector2 start, Vector2 end) {
     DrawLineEx(start, end, 5, PLATFORM);    
   }
-  void Draw(float start1, float start2, float end1, float end2) {
-    start2 = start2 + 6;
-    end2 = end2 + 6;
-    Graph(Vector2{BLOCK * start1 + BLOCK, BLOCK * start2 + BLOCK}, Vector2{BLOCK * end1 + BLOCK,BLOCK * end2 + BLOCK});
+  void Draw(Vector2 start, Vector2 end) {
+    start.y = start.y + 6;
+    end.y = end.y + 6;
+    Graph(Vector2{BLOCK * start.x + BLOCK, BLOCK * start.y + BLOCK}, Vector2{BLOCK * end.x + BLOCK,BLOCK * end.y + BLOCK});
   }
 };
 

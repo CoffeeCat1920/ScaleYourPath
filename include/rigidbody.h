@@ -8,25 +8,45 @@
 
 class Ball {
 private:
-  bool isMouse = false;
-  Vector2 mousePosition;
+  int radius;
+  bool isMoving = false;
   int onScreen = true;
+  Vector2 mousePosition;
   Vector2 position;
 public:
+
   Ball(int x, int y) {
     position.x = x;
     position.y = y;
+    radius = BLOCK/4;
   }
+
+  bool Collision(Vector2 start, Vector2 end) {
+
+    start.y = start.y + 6;
+    end.y = end.y + 6;
+
+    start = Vector2{BLOCK * start.x + BLOCK, BLOCK * start.y + BLOCK};
+    end =  Vector2{BLOCK * end.x + BLOCK,BLOCK * end.y + BLOCK};
+    
+    return true;
+
+  }
+
   void Move() {
     position.y += 0.06;
   }
-  void Draw(Vector2 p1, Vector2 p2) {
-    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) isMouse = true;
-    DrawCircle(BLOCK * position.x, BLOCK * position.y, BLOCK/4, BALL);
-    if (!(CheckCollisionPointLine(position, p1, p2, 1)) && isMouse) {
+
+  void Draw(Vector2 start, Vector2 end) {
+
+    DrawCircle(BLOCK * position.x, BLOCK * position.y, radius, BALL);
+
+    if (isMoving) {
       Move();
-      std::cout << p1.x << ", " << p1.y << " " << p2.x << ", " << p2.y << std::endl;
     }
+
+    if (IsKeyPressed(KEY_SPACE)) isMoving = !isMoving;
+
   }
 };
 

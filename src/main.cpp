@@ -36,15 +36,14 @@ public:
     float y2 = inputbox2->Output().y - '0';
 
     //drawing_line
-    if (x1 <=6 && x2 <=6 && y1 <=6 && y2 <= 6 && x1 >=0 && x2 >=0 && y1 >=0 && y2 >=0) line->Draw(x1, -y1, x2, -y2);
-    else if (x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0) line->Draw(0, 0, 0, 0); 
+    if (x1 <=6 && x2 <=6 && y1 <=6 && y2 <= 6 && x1 >=0 && x2 >=0 && y1 >=0 && y2 >=0) line->Draw(Vector2{x1, -y1}, Vector2{x2, -y2});
+    else if (x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0) line->Draw(Vector2{0, 0}, Vector2{0, 0}); 
     else DrawText("Out of Range", BLOCK * 2, BLOCK * 0, BLOCK, ERROR);
 
     //draw_grid
     grid->DrawGrid();
 
-    //drawing_ball
-    ball->Draw(Vector2 {BLOCK * x1 + BLOCK, BLOCK * (y1+6) + BLOCK}, Vector2{BLOCK * x2 + BLOCK, BLOCK * (y2+6) + BLOCK});
+    ball->Draw(Vector2{x1, -y1}, Vector2{x2, -y2});
   }
 };
 

@@ -4,11 +4,6 @@
 #include "raylib.h"
 #include "settings.h"
 
-struct Vec {
-  int x;
-  int y;
-};
-
 class Box {
 private:
   Rectangle boundry;
@@ -77,8 +72,8 @@ public:
     box1->Draw(x, y);
     box2->Draw(x+1, y);
   }
-  Vec Output() {
-    Vec vec;
+  Vector2 Output() {
+    Vector2 vec;
     vec.x = (int)box1->Output();
     vec.y = (int)box2->Output();
     return vec;
