@@ -11,13 +11,13 @@ private:
   int radius;
   bool isMoving = false;
   int onScreen = true;
-  Vector2 mousePosition;
-  Vector2 position;
+  Vector2 mousecenter;
+  Vector2 center;
 public:
 
   Ball(int x, int y) {
-    position.x = x;
-    position.y = y;
+    center.x = x * BLOCK;
+    center.y = y * BLOCK;
     radius = BLOCK/4;
   }
 
@@ -28,20 +28,25 @@ public:
 
     start = Vector2{BLOCK * start.x + BLOCK, BLOCK * start.y + BLOCK};
     end =  Vector2{BLOCK * end.x + BLOCK,BLOCK * end.y + BLOCK};
-    
-    return true;
+
+    if (CheckCollisionPointLine(Vector2{center.x+radius, center.y}, start, end, 1)) return true;
+    if (CheckCollisionPointLine(Vector2{center.x-radius, center.y}, start, end, 1)) return true;
+    if (CheckCollisionPointLine(Vector2{center.x, center.y+radius}, start, end, 1)) return true;
+    if (CheckCollisionPointLine(Vector2{center.x, center.y-radius}, start, end, 1)) return true;
+
+    return false;
 
   }
 
   void Move() {
-    position.y += 0.06;
+    center.y += 0.06 * BLOCK;
   }
 
   void Draw(Vector2 start, Vector2 end) {
 
-    DrawCircle(BLOCK * position.x, BLOCK * position.y, radius, BALL);
+    DrawCircle(center.x, center.y, radius, BALL);
 
-    if (isMoving) {
+    if (isMoving && !Collision(start, end)) {
       Move();
     }
 
