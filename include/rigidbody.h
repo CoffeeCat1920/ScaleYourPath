@@ -16,12 +16,12 @@ private:
 public:
 
   Ball(int x, int y) {
+    radius = BLOCK/4;
     center.x = x * BLOCK;
     center.y = y * BLOCK;
-    radius = BLOCK/4;
   }
 
-  bool Collision(Vector2 start, Vector2 end) {
+  bool CheckCollision(Vector2 start, Vector2 end) {
 
     start.y = start.y + 6;
     end.y = end.y + 6;
@@ -29,11 +29,7 @@ public:
     start = Vector2{BLOCK * start.x + BLOCK, BLOCK * start.y + BLOCK};
     end =  Vector2{BLOCK * end.x + BLOCK,BLOCK * end.y + BLOCK};
 
-    if (CheckCollisionPointLine(Vector2{center.x+radius, center.y}, start, end, 1)) return true;
-    if (CheckCollisionPointLine(Vector2{center.x-radius, center.y}, start, end, 1)) return true;
-    if (CheckCollisionPointLine(Vector2{center.x, center.y+radius}, start, end, 1)) return true;
-    if (CheckCollisionPointLine(Vector2{center.x, center.y-radius}, start, end, 1)) return true;
-
+    if (CheckCollisionPointLine(Vector2{(center.x) , (center.y+radius)}, start, end, 1)) return true; 
     return false;
 
   }
@@ -46,7 +42,7 @@ public:
 
     DrawCircle(center.x, center.y, radius, BALL);
 
-    if (isMoving && !Collision(start, end)) {
+    if (isMoving && !CheckCollision(start, end)) {
       Move();
     }
 

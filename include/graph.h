@@ -3,7 +3,6 @@
 
 #include <iostream>
 
-#include "gui.h"
 #include "raylib.h"
 #include "settings.h"
 
@@ -15,7 +14,7 @@ public:
     body[0] = ' ';
     body[1] = '\0';
   }
-  void DrawGrid() { 
+  void Draw() { 
     for (float i = 0; i<=BOARD; i++) {
       DrawLineEx(Vector2{0 + BLOCK, BLOCK * i + BLOCK}, Vector2{BLOCK * BOARD + BLOCK, BLOCK * i + BLOCK}, 1, LINES); 
       DrawLineEx(Vector2{BLOCK * i + BLOCK, 0 + BLOCK}, Vector2{BLOCK * i + BLOCK, BLOCK * BOARD + BLOCK}, 1, LINES); 

@@ -3,6 +3,7 @@
 
 #include "raylib.h"
 #include "settings.h"
+#include "graph.h"
 
 class Box {
 private:
@@ -63,6 +64,7 @@ class InputBox {
 private:
   Box *box1 = new Box();
   Box *box2 = new Box();
+  Line *line = new Line;
 public:
   ~ InputBox() {
     delete  box1;
@@ -72,11 +74,47 @@ public:
     box1->Draw(x, y);
     box2->Draw(x+1, y);
   }
+
   Vector2 Output() {
     Vector2 vec;
     vec.x = (int)box1->Output();
     vec.y = (int)box2->Output();
     return vec;
+  } 
+
+};
+
+class VectorBox {
+private:
+  InputBox *inputbox1 = new InputBox(); 
+  InputBox *inputbox2 = new InputBox();
+  Line *line = new Line();
+  int x;
+  int y;
+public:
+  VectorBox(int x, int y) {
+    this->x = x;
+    this->y = y;
+  }
+  void Draw() {
+    
+    //box1:
+    inputbox1->Update(x, y);
+    DrawText("start", (BLOCK+5) * 8, (BLOCK) * 0.5, LINE_FONT_SIZE, PLATFORM);
+    inputbox2->Update(x+3, y);
+    DrawText("stop", (BLOCK+5) * 11, (BLOCK) * 0.5, LINE_FONT_SIZE, PLATFORM);
+
+    //input_taking
+    float x1 = inputbox2->Output().x - '0';
+    float y1 = inputbox2->Output().y - '0';
+    float x2 = inputbox1->Output().x - '0'; 
+    float y2 = inputbox2->Output().y - '0';
+
+    //drawing_line
+    if (x1 <=6 && x2 <=6 && y1 <=6 && y2 <= 6 && x1 >=0 && x2 >=0 && y1 >=0 && y2 >=0) line->Draw(Vector2{x1, -y1}, Vector2{x2, -y2});
+    else if (x1 < 0 || y1 < 0 || x2 < 0 || y2 < 0) line->Draw(Vector2{0, 0}, Vector2{0, 0}); 
+    else DrawText("Out of Range", BLOCK * 2, BLOCK * 0, BLOCK, ERROR);
+
   } 
 };
 
