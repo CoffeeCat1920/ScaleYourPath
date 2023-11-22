@@ -4,6 +4,7 @@
 #include "../include/settings.h"
 #include "../include/graph.h"
 #include "../include/gui.h"
+
 #include <iostream>
 
 class Game {
@@ -11,7 +12,7 @@ private:
   Grid *grid = new Grid(); 
   Ball *ball = new Ball(4, 1);
   VectorBox *line1 = new VectorBox(8, 1); 
-  VectorBox *line2 = new VectorBox(8, 1); 
+  VectorBox *line2 = new VectorBox(8, 3); 
 public:
   ~Game() {
     delete grid;
@@ -22,9 +23,14 @@ public:
 
     //draw_line
     line1->Draw();
+    line2->Draw();
 
     //draw_grid
     grid->Draw();
+
+    //ball
+    ball->Draw(Vector2{}, Vector2{line1->inputbox2->Output().x, -(line1->inputbox2->Output().y)}); 
+
   }
 };
 

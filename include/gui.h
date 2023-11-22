@@ -77,8 +77,8 @@ public:
 
   Vector2 Output() {
     Vector2 vec;
-    vec.y = (int)box1->Output();
-    vec.x = (int)box2->Output();
+    vec.x = ((int)box2->Output()) - '0';
+    vec.y = ((int)box1->Output()) - '0';
     return vec;
   } 
 
@@ -86,12 +86,12 @@ public:
 
 class VectorBox {
 private:
-  InputBox *inputbox1 = new InputBox(); 
-  InputBox *inputbox2 = new InputBox();
   Line *line = new Line();
   int x;
   int y;
 public:
+  InputBox *inputbox1 = new InputBox(); 
+  InputBox *inputbox2 = new InputBox();
   VectorBox(int x, int y) {
     this->x = x;
     this->y = y;
@@ -105,10 +105,10 @@ public:
     DrawText("stop", (BLOCK+5) * 11, (BLOCK) * 0.5, LINE_FONT_SIZE, PLATFORM);
 
     //input_taking
-    float x1 = inputbox1->Output().x - '0';
-    float y1 = inputbox1->Output().y - '0';
-    float x2 = inputbox2->Output().x - '0'; 
-    float y2 = inputbox2->Output().y - '0';
+    float x1 = inputbox1->Output().x;
+    float y1 = inputbox1->Output().y;
+    float x2 = inputbox2->Output().x; 
+    float y2 = inputbox2->Output().y;
 
     //drawing_line
     if (x1 <=6 && x2 <=6 && y1 <=6 && y2 <= 6 && x1 >=0 && x2 >=0 && y1 >=0 && y2 >=0) line->Draw(Vector2{x1, -y1}, Vector2{x2, -y2});
