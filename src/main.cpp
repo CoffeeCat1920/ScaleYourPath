@@ -11,6 +11,7 @@ private:
   Grid *grid = new Grid(); 
   Ball *ball = new Ball(4, 1);
   VectorBox *line1 = new VectorBox(8, 1); 
+  VectorBox *line2 = new VectorBox(8, 1); 
 public:
   ~Game() {
     delete grid;

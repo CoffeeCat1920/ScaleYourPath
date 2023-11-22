@@ -77,8 +77,8 @@ public:
 
   Vector2 Output() {
     Vector2 vec;
-    vec.x = (int)box1->Output();
-    vec.y = (int)box2->Output();
+    vec.y = (int)box1->Output();
+    vec.x = (int)box2->Output();
     return vec;
   } 
 
@@ -105,9 +105,9 @@ public:
     DrawText("stop", (BLOCK+5) * 11, (BLOCK) * 0.5, LINE_FONT_SIZE, PLATFORM);
 
     //input_taking
-    float x1 = inputbox2->Output().x - '0';
-    float y1 = inputbox2->Output().y - '0';
-    float x2 = inputbox1->Output().x - '0'; 
+    float x1 = inputbox1->Output().x - '0';
+    float y1 = inputbox1->Output().y - '0';
+    float x2 = inputbox2->Output().x - '0'; 
     float y2 = inputbox2->Output().y - '0';
 
     //drawing_line
