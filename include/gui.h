@@ -77,8 +77,8 @@ public:
 
   Vector2 Output() {
     Vector2 vec;
-    vec.x = ((int)box2->Output()) - '0';
-    vec.y = ((int)box1->Output()) - '0';
+    vec.y = ((int)box2->Output()) - '0';
+    vec.x = ((int)box1->Output()) - '0';
     return vec;
   } 
 

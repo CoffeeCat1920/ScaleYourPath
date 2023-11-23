@@ -21,15 +21,18 @@ public:
     center.y = y * BLOCK;
   }
 
-  bool CheckCollision(Vector2 start, Vector2 end) {
+  bool CheckCollision(Vector2 start1, Vector2 end1) {
 
-    start.y = start.y + 6;
-    end.y = end.y + 6;
+    start1.y = start1.y + 6;
+    end1.y = end1.y + 6;
 
-    start = Vector2{BLOCK * start.x + BLOCK, BLOCK * start.y + BLOCK};
-    end =  Vector2{BLOCK * end.x + BLOCK,BLOCK * end.y + BLOCK};
+    start1 = Vector2{BLOCK * start1.x + BLOCK, BLOCK * start1.y + BLOCK};
+    end1 =  Vector2{BLOCK * end1.x + BLOCK,BLOCK * end1.y + BLOCK};
 
-    if (CheckCollisionPointLine(Vector2{(center.x), (center.y)}, start, end, 1)) return true; 
+    if (CheckCollisionPointLine(Vector2{(center.x), (center.y)}, start1, end1, 1)) {
+      return true;
+    }
+    
     return false;
 
   }
@@ -38,9 +41,13 @@ public:
     center.y += 0.06 * BLOCK;
   }
 
-  void Draw(Vector2 start, Vector2 end) {
-
+  void Draw() {
     DrawCircle(center.x, center.y, radius, BALL);
+  }
+
+  void Collide(Vector2 start, Vector2 end) {
+
+    std::cout << isMoving << std::endl;
 
     if (isMoving && !CheckCollision(start, end)) {
       Move();

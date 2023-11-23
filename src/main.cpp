@@ -21,15 +21,16 @@ public:
   }
   void Update() {
 
+    //draw_grid
+    grid->Draw();
+
     //draw_line
     line1->Draw();
     line2->Draw();
 
-    //draw_grid
-    grid->Draw();
-
     //ball
-    ball->Draw(Vector2{}, Vector2{line1->inputbox2->Output().x, -(line1->inputbox2->Output().y)}); 
+    ball->Draw();
+    ball->Collide(Vector2{line1->inputbox1->Output().x, -(line1->inputbox1->Output().y)}, Vector2{line1->inputbox2->Output().x, -(line1->inputbox2->Output().y)});
 
   }
 };
