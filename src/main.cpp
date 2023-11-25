@@ -26,7 +26,7 @@ public:
 
     //draw_line
     line1->Draw();
-    line2->Draw();
+    //line2->Draw();
 
     //ball
     ball->Draw();

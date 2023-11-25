@@ -2,8 +2,10 @@
 #define GUI_H
 
 #include "raylib.h"
+#include "raymath.h"
 #include "settings.h"
 #include "graph.h"
+#include <vector>
 
 class Box {
 private:
@@ -77,8 +79,8 @@ public:
 
   Vector2 Output() {
     Vector2 vector;
-    vector.x = (BLOCK * ((int)box1->Output()) - '0' + BLOCK);
-    vector.y = (BLOCK * (-(((int)box2->Output()) - '0')) + 6 + BLOCK);
+    vector.x = BLOCK * ((int)box1->Output() - '0') + BLOCK;
+    vector.y = BLOCK * (6-((int)box2->Output() - '0')) + BLOCK;
     return vector;
   } 
 
@@ -105,15 +107,13 @@ public:
     DrawText("stop", (BLOCK+5) * 11, (BLOCK) * 0.5, LINE_FONT_SIZE, PLATFORM);
 
     //input_taking
-    Vector2 start = inputbox2->Output(); 
-    Vector2 end = inputbox1->Output();
-
-    line->Draw(start, end);
+    Vector2 start = inputbox1->Output(); 
+    Vector2 end = inputbox2->Output();
 
     //drawing_line
-    //if (start.x <=6 && start.y <=6 && end.x <=6 &&  end.y <= 6 && start.x >=0 && start.y >=0 && end.x >=0 && end.y >=0) line->Draw(start, end);
-    //else if (start.x < 0 || start.y < 0 || end.x < 0 || end.y < 0) line->Draw(Vector2{0, 0}, Vector2{0, 0}); 
-    //else DrawText("Out of Range", BLOCK * 2, BLOCK * 0, BLOCK, ERROR);
+    if (start.x <=6 && start.y <=6 && end.x <=6 &&  end.y <= 6 && start.x >=0 && start.y >=0 && end.x >=0 && end.y >=0) line->Draw(start, end);
+    else if (start.x < 0 || start.y < 0 || end.x < 0 || end.y < 0) line->Draw(Vector2{0, 0}, Vector2{0, 0}); 
+    else DrawText("Out of Range", BLOCK * 2, BLOCK * 0, BLOCK, ERROR);
 
   } 
 };
