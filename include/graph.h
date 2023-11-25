@@ -35,9 +35,7 @@ public:
     DrawLineEx(start, end, 5, PLATFORM);    
   }
   void Draw(Vector2 start, Vector2 end) {
-    start.y = start.y + 6;
-    end.y = end.y + 6;
-    Graph(Vector2{BLOCK * start.x + BLOCK, BLOCK * start.y + BLOCK}, Vector2{BLOCK * end.x + BLOCK,BLOCK * end.y + BLOCK});
+    Graph(start, end);
   }
 };
 

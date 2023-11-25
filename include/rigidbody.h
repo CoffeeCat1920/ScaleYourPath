@@ -23,15 +23,7 @@ public:
 
   bool CheckCollision(Vector2 start1, Vector2 end1) {
 
-    start1.y = start1.y + 6;
-    end1.y = end1.y + 6;
-
-    start1 = Vector2{BLOCK * start1.x + BLOCK, BLOCK * start1.y + BLOCK};
-    end1 =  Vector2{BLOCK * end1.x + BLOCK,BLOCK * end1.y + BLOCK};
-
-    if (CheckCollisionPointLine(Vector2{(center.x), (center.y)}, start1, end1, 1)) {
-      return true;
-    }
+    if (CheckCollisionPointLine(Vector2{(center.x), (center.y)}, start1, end1, 1)) return true;
     
     return false;
 
@@ -46,8 +38,6 @@ public:
   }
 
   void Collide(Vector2 start, Vector2 end) {
-
-    std::cout << isMoving << std::endl;
 
     if (isMoving && !CheckCollision(start, end)) {
       Move();
