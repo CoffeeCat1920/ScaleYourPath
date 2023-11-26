@@ -30,7 +30,7 @@ public:
 
     //ball
     ball->Draw();
-    ball->Collide(Vector2{line1->inputbox1->Output().x, -(line1->inputbox1->Output().y)}, Vector2{line1->inputbox2->Output().x, -(line1->inputbox2->Output().y)});
+    ball->Collide(line1->inputbox1->Output(), line1->inputbox2->Output());
 
   }
 };

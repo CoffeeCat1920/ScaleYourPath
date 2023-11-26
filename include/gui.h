@@ -77,6 +77,13 @@ public:
     box2->Draw(x+1, y);
   }
 
+  Vector2 OldOutput() {
+    Vector2 vector;
+    vector.x = (int)box1->Output() - '0';
+    vector.y = (int)box2->Output() - '0';
+    return vector;
+  }
+
   Vector2 Output() {
     Vector2 vector;
     vector.x = BLOCK * ((int)box1->Output() - '0') + BLOCK;
@@ -109,12 +116,14 @@ public:
     //input_taking
     Vector2 start = inputbox1->Output(); 
     Vector2 end = inputbox2->Output();
+    Vector2 ustart = inputbox1->OldOutput();
+    Vector2 uend = inputbox2->OldOutput();
 
+    
     //drawing_line
-    if (start.x <=6 && start.y <=6 && end.x <=6 &&  end.y <= 6 && start.x >=0 && start.y >=0 && end.x >=0 && end.y >=0) line->Draw(start, end);
-    else if (start.x < 0 || start.y < 0 || end.x < 0 || end.y < 0) line->Draw(Vector2{0, 0}, Vector2{0, 0}); 
+    if (ustart.x <=6 && ustart.y <=6 && uend.x <=6 &&  uend.y <= 6 && ustart.x >=0 && ustart.y >=0 && uend.x >=0 && uend.y >=0) line->Draw(start, end);
+    else if (ustart.x < 0 || ustart.y < 0 || uend.x < 0 || uend.y < 0) line->Draw(Vector2{0, 0}, Vector2{0, 0}); 
     else DrawText("Out of Range", BLOCK * 2, BLOCK * 0, BLOCK, ERROR);
-
   } 
 };
 

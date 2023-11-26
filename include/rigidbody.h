@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "raylib.h"
+#include "raymath.h"
 #include "settings.h"
 
 class Ball {
@@ -21,10 +22,17 @@ public:
     center.y = y * BLOCK;
   }
 
-  bool CheckCollision(Vector2 start1, Vector2 end1) {
-
-    if (CheckCollisionPointLine(Vector2{(center.x), (center.y)}, start1, end1, 1)) return true;
+  bool CheckCollision(Vector2 start, Vector2 end) {
     
+    Vector2 direction = Vector2Subtract(end, start);
+    float t = Vector2DotProduct(Vector2Subtract(center, start), direction) / Vector2LengthSqr(direction);
+    Vector2 projection = Vector2Add(start, Vector2Scale(direction, t));
+    float distance = Vector2Length(Vector2Subtract(center, projection));
+
+    if (distance < radius) {
+      return true;
+    }
+
     return false;
 
   }
