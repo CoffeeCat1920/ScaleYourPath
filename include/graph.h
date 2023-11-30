@@ -1,8 +1,6 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-#include <iostream>
-
 #include "raylib.h"
 #include "settings.h"
 

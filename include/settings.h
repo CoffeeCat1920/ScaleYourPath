@@ -4,7 +4,7 @@
 #define FONT_SIZE 100 
 #define LINE_FONT_SIZE 32
 
-#define FONT (SpriteFont) ../assests/deepkyd-normal.otf
+#define ZERO (Vector2) {0, 0} 
 
 #define LIGHT_BLUE (Color) {173, 216, 255, 255}
 #define LAVENDER_MIST (Color) {232, 230, 249, 255}

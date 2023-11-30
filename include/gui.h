@@ -5,7 +5,55 @@
 #include "raymath.h"
 #include "settings.h"
 #include "graph.h"
-#include <vector>
+
+#include <iostream>
+#include <string>
+
+class Button {
+
+private:
+  Rectangle box;
+  Rectangle boundry;
+  bool onMouse = false;
+public:
+  Button() {
+    box.width = BLOCK+20;
+    box.height = BLOCK-50; 
+    boundry.height = box.height + 10;
+    boundry.width = box.width + 10;
+  }
+  void Draw(int x, int y) {
+    Color  boxCol = PLATFORM;
+
+    if (CheckCollisionPointRec(GetMousePosition(), box)) {
+      boxCol = LINES;
+      if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        boxCol = RED;
+      }
+    } 
+
+    box.x = x * BLOCK;
+    box.y = y * BLOCK + 20;
+
+    DrawRectangleRec(box, boxCol);
+  }
+};
+
+class Score {
+private:
+  Vector2 positon;
+  int score;
+public:
+  Score(float x, float y) {
+    positon.x = x * BLOCK;
+    positon.y = y * BLOCK;
+    score = 0;
+  }
+  void Draw() {
+    std::string stringScore = std::to_string(score);
+    DrawText("Score", (int)positon.x, (int)positon.y, FONT_SIZE, BLACK);
+  }
+};
 
 class Box {
 private:
