@@ -21,7 +21,9 @@
 #define GUNMETAL (Color) {71, 56, 74, 255}
 #define ROSE_QUARTZ (Color) {92, 82, 101, 255}
 #define SLATE_GRAY_BLUE (Color) {107, 117, 152, 255}
+#define COIN_GOLD (Color) {255, 236, 139, 255}
 
+#define POINT (Color) COIN_GOLD 
 #define BACKGROUND (Color) LAVENDER_MIST 
 #define LINES (Color) RICH_BLACK
 #define PLATFORM (Color) MAUVE

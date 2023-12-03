@@ -6,6 +6,7 @@
 #include "settings.h"
 #include "graph.h"
 
+#include <cstring>
 #include <iostream>
 #include <string>
 
@@ -15,43 +16,61 @@ private:
   Rectangle box;
   Rectangle boundry;
   bool onMouse = false;
+  bool isMoving = false;
+  char buttonName[8] = "> Start";
+
 public:
   Button() {
     box.width = BLOCK+20;
     box.height = BLOCK-50; 
-    boundry.height = box.height + 10;
-    boundry.width = box.width + 10;
+    boundry.height = box.height + 5;
+    boundry.width = box.width + 5;
   }
-  void Draw(int x, int y) {
-    Color  boxCol = PLATFORM;
+
+  bool Draw(int x, int y) {
+    Color boundryCol = LINES;
+    Color boxCol = PLATFORM;
 
     if (CheckCollisionPointRec(GetMousePosition(), box)) {
-      boxCol = LINES;
+      boxCol = BACKGROUND;
+      boundryCol = PLATFORM;
       if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         boxCol = RED;
+        isMoving = !isMoving;
       }
     } 
-
+    if (isMoving) strcpy(buttonName, "|| Stop");
+    else strcpy(buttonName, "> Start");
     box.x = x * BLOCK;
     box.y = y * BLOCK + 20;
+    
+    boundry.x = box.x - 2;
+    boundry.y = box.y - 2;
 
+    DrawRectangleRec(boundry, boundryCol);
     DrawRectangleRec(box, boxCol);
+    DrawText(buttonName, box.x+10, box.y+10, FONT_SIZE/4, boundryCol);
+    return isMoving;
   }
 };
 
 class Score {
 private:
   Vector2 positon;
-  int score;
+  int score = 0;
 public:
   Score(float x, float y) {
     positon.x = x * BLOCK;
     positon.y = y * BLOCK;
-    score = 0;
+  }
+  void IncreseScore(int amount) {
+    score = score + amount;
+  }
+  void DecreseScore(int amount) {
+    score = score - amount;
   }
   void Draw() {
-    std::string stringScore = std::to_string(score);
-    DrawText("Score", (int)positon.x, (int)positon.y, FONT_SIZE, BLACK);
+    DrawText(TextFormat("Score: %d", score), (int)positon.x, (int)positon.y, FONT_SIZE, LINES);
   }
 };
 
@@ -157,9 +176,9 @@ public:
     
     //box:
     inputbox1->Update(x, y);
-    DrawText("start", (BLOCK+5) * 8, (BLOCK) * 0.5, LINE_FONT_SIZE, PLATFORM);
+    DrawText("start", (BLOCK+5) * 8, (BLOCK) * 2, LINE_FONT_SIZE, PLATFORM);
     inputbox2->Update(x+3, y);
-    DrawText("stop", (BLOCK+5) * 11, (BLOCK) * 0.5, LINE_FONT_SIZE, PLATFORM);
+    DrawText("stop", (BLOCK+5) * 11, (BLOCK) * 2, LINE_FONT_SIZE, PLATFORM);
 
     //input_taking
     Vector2 start = inputbox1->Output(); 
