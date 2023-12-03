@@ -27,7 +27,12 @@ public:
     center.y = (y * (BLOCK));
     orintation = Vector2{0, 1};
   }
-  
+ 
+  void SetPosition(float x, float y) {
+    center.x = x*BLOCK;
+    center.y = y*BLOCK;
+  }
+
   Vector2 Direction(Vector2 start, Vector2 end) {
 
     float a = end.y - start.y;
@@ -92,6 +97,10 @@ public:
 
   void Draw() {
     DrawCircle(center.x, center.y, radius, BALL);
+  }
+
+  Vector2 Position() {
+    return center;
   }
 
   void Collide(Vector2 start1 = ZERO, Vector2 end1 = ZERO, Vector2 start2 = ZERO, Vector2 end2 = ZERO, Vector2 start3 = ZERO, Vector2 end3 = ZERO, bool isMoving = false) {

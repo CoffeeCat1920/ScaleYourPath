@@ -26,7 +26,9 @@ public:
     boundry.height = box.height + 5;
     boundry.width = box.width + 5;
   }
-
+  void StopMoving() {
+    isMoving = false;
+  }
   bool Draw(int x, int y) {
     Color boundryCol = LINES;
     Color boxCol = PLATFORM;

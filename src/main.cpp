@@ -17,7 +17,7 @@ private:
   VectorBox *line2 = new VectorBox(8, 3); 
   VectorBox *line3 = new VectorBox(8, 5);
   Score *score = new Score(8.5, 5);
-  Point *point = new Point(ball->ReturnPosition());
+  Point *point = new Point();
 public:
   ~Game() {
     delete grid;
@@ -34,12 +34,21 @@ public:
     //draw_line
     line1->Draw();
     
-    //point
-    point->Draw();
-
     //ui
     bool isMoving = startButton->Draw(10, 1);
     score->Draw();
+
+     //point
+    if (point->Draw(ball->ReturnPosition())) {
+      score->IncreseScore(5);
+      startButton->StopMoving();
+      ball->SetPosition(4, 1);
+    }
+    if (ball->Position().y < 0 || ball->Position().x < 0) {
+      score->DecreseScore(5);
+      startButton->StopMoving();
+      ball->SetPosition(4, 1);
+    }
 
     //ball
     ball->Draw();

@@ -4,6 +4,8 @@
 #include "raylib.h"
 #include "settings.h"
 
+#include <iostream>
+
 class Point {
 private:
   float x, y;
@@ -11,29 +13,30 @@ private:
   Vector2 positionH;
   Vector2 positionV;
   bool contact = false;
-  Vector2 center;
 public:
-  Point(Vector2 center) {
+  Point() {
     positionH = Vector2{((float)GetRandomValue(0 , 6)*(BLOCK)), -(0.5*BLOCK)};
     positionV = Vector2{-(0.5*BLOCK), ((float)GetRandomValue(0, 7)*BLOCK)};
     pointRectangle.width = BLOCK;
     pointRectangle.height = BLOCK;
-    this->center = center; 
   }
-  bool Collision() {
-    if (CheckCollisionCircleRec(center, BLOCK/4, pointRectangle)) return true;
+  void Randomize() {
+    positionH = Vector2{((float)GetRandomValue(0 , 6)*(BLOCK)), -(0.5*BLOCK)};
+  }
+  bool Collision(Vector2 center) {
+    if (CheckCollisionCircleRec(center, (float)BLOCK/4, pointRectangle)) return true;
     return false;
   }
-  void Draw() {
-    contact = Collision();
-    if (contact) { 
-      pointRectangle.x = positionV.x; 
-      pointRectangle.y = positionV.y;
-    } else {
-      pointRectangle.x = positionH.x; 
-      pointRectangle.y = positionH.y;
+  bool Draw(Vector2 center) {
+    contact = Collision(center);
+    pointRectangle.x = positionH.x; 
+    pointRectangle.y = positionH.y;
+    if (contact) {
+      Randomize();
+      return true;
     }
     DrawRectangleRec(pointRectangle, POINT);
+    return false;
   }
 };
 
