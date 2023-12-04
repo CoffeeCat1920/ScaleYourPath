@@ -8,6 +8,7 @@
 
 #include <iostream>
 
+
 class Game {
 private:
   Grid *grid = new Grid(); 
@@ -38,14 +39,16 @@ public:
     bool isMoving = startButton->Draw(10, 1);
     score->Draw();
 
+    ball->Lowest();
+
      //point
     if (point->Draw(ball->ReturnPosition())) {
-      score->IncreseScore(5);
+      score->IncreseScore(5+(ball->Lowest()/BLOCK));
       startButton->StopMoving();
       ball->SetPosition(4, 1);
     }
     if (ball->Position().y < 0 || ball->Position().x < 0) {
-      score->DecreseScore(5);
+      score->DecreseScore(5+(ball->Lowest()/BLOCK));
       startButton->StopMoving();
       ball->SetPosition(4, 1);
     }

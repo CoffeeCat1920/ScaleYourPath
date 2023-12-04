@@ -17,6 +17,7 @@ private:
   Vector2 mousecenter;
   Vector2 center;
   Vector2 orintation;
+  float lowest = 1;
 public:
 
   Ball(int x, int y) {
@@ -31,6 +32,7 @@ public:
   void SetPosition(float x, float y) {
     center.x = x*BLOCK;
     center.y = y*BLOCK;
+    orintation = Vector2{0, 1};
   }
 
   Vector2 Direction(Vector2 start, Vector2 end) {
@@ -109,7 +111,12 @@ public:
       Move();
     } 
   }
-  
+ 
+  float Lowest() {
+    if (center.y > lowest) lowest = center.y;
+    return lowest;
+  }
+
   Vector2 ReturnPosition() {
     return center;
   }
